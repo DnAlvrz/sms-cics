@@ -1,0 +1,15 @@
+<h1>Log in </h1>
+<% if(messages.error) {%>
+  <%= messages.error%>
+<%}%>
+<form action="/login" method="post">
+  <div> 
+    <label for="schoolId">School ID</label>
+    <input type="text" name="schoolId" id="schoolId" placeholder="Enter School ID">
+  </div>
+  <div> 
+    <label for="password">School ID</label>
+    <input type="password" name="password" id="password" placeholder="Enter your password">
+  </div>
+  <input type="submit" value="Submit">
+</form>
