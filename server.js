@@ -15,9 +15,6 @@ initPassport(passport);
 dotenv.config({path:'.env'})
 const PORT = process.env.PORT || 8080;
 
-
-
-
 //log requests
 app.use(morgan('dev'));
 

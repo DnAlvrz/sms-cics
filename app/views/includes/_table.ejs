@@ -1,0 +1,44 @@
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">School ID</th>
+      <th scope="col">Firstname</th>
+      <th scope="col">Lastname</th>
+      <th scope="col">Course</th>
+      <th scope="col">Year</th>
+      <th scope="col">Status</th>
+      <th scope="col">Contact No.</th>
+    </tr>
+  </thead>
+  <tbody>
+    <h1><%= users.firstname %></h1>
+    <% if (users.length > 0) { %>
+      <% users.forEach((user) => { %>
+        <tr> 
+          <th scope="row"><%= user.schoolId %> </th>
+          <td><%= user.firstname %></td>
+          <td><%= user.lastname %></td>
+          <% if (user.course) { %>
+            <td><%= user.course.name%></td>
+          <% } else { %>
+            <td>None</td> 
+            <% }%>
+          <td><%= user.yearLv %></td>
+          <td><%= user.status %></td>
+          <td><%= user.contactNum %></td>
+        </tr>
+      <% }) %>
+    <% } %>
+    
+  </tbody>
+</table>
+<!-- <nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+  </ul>
+</nav> -->

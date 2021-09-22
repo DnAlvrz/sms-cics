@@ -1,0 +1,33 @@
+<%- include('includes/admin/_header') %>
+<div class="card">
+  <div class="card-header text-center">
+    <h6> Courses</h6>
+  </div>
+  <div class="card-body">
+    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Update</button>
+    
+  </div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New Course</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <!-- Form here -->
+      <form action="/admin/courses" method="POST">
+        <div class="form-group mb-2">
+          <label for="name">Course</label>
+          <input type="text" class="form-control" name="name" id="name" placeholder="Course Name">
+        </div>
+        <input type="submit" class="btn btn-primary" value="Submit">
+      </form>
+      
+      </div>
+    </div>
+  </div>
+</div>
+<%- include('includes/admin/_footer') %>
+

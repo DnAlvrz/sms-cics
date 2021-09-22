@@ -21,6 +21,8 @@ module.exports.new = async (req,res) => {
   for(const key of Object.keys(req.body)) {
     data[key] = req.body[key]
   }
+  console.log(req.body);
+  console.log(data);
   try {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.schoolId, salt)

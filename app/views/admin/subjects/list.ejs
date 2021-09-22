@@ -1,0 +1,89 @@
+<%- include('includes/admin/_header') %>
+<div class="card">
+  <div class="card-header text-center">
+    <h6> Subjects</h6>
+  </div>
+  <div class="card-body">
+    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">New Subject</button>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Code</th>
+          <th scope="col">Subject</th>
+          <th scope="col">Semester</th>
+          <th scope="col">Year Level</th>
+          <th scope="col">Prerequisite</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (subjects.length >0) {%> 
+          <% subjects.forEach(subject => { %>
+            <tr>
+              <td><%= subject.subCode %></td>
+              <th><%= subject.description %> </td>
+              <td><%= subject.sem %></td>
+              <td><%= subject.yearLvl %></td>
+              <td></td>
+            </tr>
+          <% }) %>
+        <% } %> 
+      </tbody>
+    </table>
+  </div>
+</div>
+<!--Modal Start-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center" id="subjectModalTitle">New Subject</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <!-- Form Start -->
+      <form action="/admin/subjects" method="POST">
+        <div class="row mb-2">
+          <div class="col-md-6">
+            <div class="form-group ">
+              <label for="subCode">Subject Code</label>
+              <input type="text" class="form-control" name="subCode" id="subCode" placeholder="Code">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="sem">Semester</label>
+            <select class="form-select" name="sem" aria-label="Default select example">
+              <option selected>Select Sem</option>
+              <option value="First Semester">1st Sem </option>
+              <option value="Second Semester">2nd Sem </option>
+            </select>
+          </div>
+         
+        </div>
+        <div class="row mb-2">
+          <div class="col-md-8">
+            <div class="form-group ">
+              <label for="description">Description</label>
+              <input type="text" class="form-control" name="description" id="description" placeholder="Subject Description">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label for="sem">Year</label>
+            <select class="form-select" name="yearLvl" aria-label="Default select example">
+              <option selected>Select Year</option>
+              <option value="First Year">1st year</option>
+              <option value="Second Year">2nd year</option>
+              <option value="Third Year">3rd year</option>
+              <option value="Fourth Year">4th year</option>
+            </select>
+          </div>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Submit">
+      </form>
+      <!-- Form End -->
+      </div>
+    </div>
+  </div>
+</div>
+<!--Modal End-->
+<%- include('includes/admin/_footer') %>
+

@@ -22,7 +22,7 @@ module.exports.schoolYear = async (req,res) => {
     const schoolyears = await AcademicYear.findAll();
     res.render('admin/schoolyears', { schoolyears: schoolyears});
   } catch (error) {
-    console.log(error);
+    res.render('500')
   }
   res.render('admin/schoolyears')
 }
