@@ -24,7 +24,8 @@ router.post('/semesters',adminRoutes.newSemester);
 //Courses
 router.get('/courses', adminCourseRoutes.course);
 router.post('/courses', adminCourseRoutes.new);
-router.get('/course/:uuid', adminCourseRoutes.view);
+router.get('/courses/:uuid', adminCourseRoutes.view);
+router.post('/courses/:uuid/add-subjects', adminCourseRoutes.addsubjects);
 // Students
 router.get('/students', adminStudentRoutes.list);
 router.post('/students', adminStudentRoutes.new);

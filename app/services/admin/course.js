@@ -4,9 +4,14 @@ const  {Course, User, Subject} = require('../../../models')
 module.exports.course = async (req,res) => {
   try{
     const courses = await Course.findAll({include: [
-      'students',
-    ]
-  });
+        'students',
+        { model: Subject,
+          through: {
+            as: 'coursesubjects'
+          }}
+    ]});
+    
+
     res.render('admin/courses/courses', {courses:courses})
   } catch(error) {
     console.log(error);
@@ -23,7 +28,6 @@ module.exports.new = async (req,res) => {
     data[key] = req.body[key]
   }
   try {
-    console.log(data)
     const course = await Course.create(data);
     res.redirect('/admin/courses');
   } catch (error) {
@@ -34,8 +38,31 @@ module.exports.new = async (req,res) => {
 
 module.exports.view = async (req,res) => {
   const uuid = req.params.uuid;
-  const course = await Course.findOne({where:{uuid}});
+  const course = await Course.findOne({where:{uuid}, include: [{model:Subject, through: {as:'coursesubjects'}}]});
+  const subjects = await Subject.findAll();
   if(course) {
-    res.render('admin/courses/view', {course:course})
+    res.render('admin/courses/view', {course:course, subjects:subjects})
   }
+}
+
+
+module.exports.addsubjects = async (req,res) => {
+  const uuid = req.params.uuid;
+  const subuuid=[];
+  for(const key of Object.keys(req.body)){
+    subuuid.push(req.body[key]);  
+  }
+  try {
+    const subjects = await Subject.findAll({ where: {
+      uuid:subuuid
+    }});
+    const course = await Course.findOne({where:{uuid}});
+    course.addSubjects(subjects)
+    res.redirect(`/admin/courses/${uuid}`)
+
+  } catch (error) {
+    console.log(error);
+    res.render('500', {error:error})
+  }
+  
 }

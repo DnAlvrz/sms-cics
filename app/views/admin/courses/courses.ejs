@@ -21,14 +21,10 @@
               <th scope="row"><%= course.name %> </th>
               <td> <%= course.students.length %></td>
               <td>
-                <% if (course.coursesubjects) { %>
-                  <%= course.coursesubjects.length %>
-                <% } else { %>
-                  0
-                  <% }  %>
+                  <%= course.Subjects.length %>
               </td>
               <td>
-                <a href="/admin/course/<%=course.uuid%>"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+                <a href="/admin/courses/<%=course.uuid%>"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
               </td>
             </tr>
           <% }) %>

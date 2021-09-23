@@ -1,33 +1,244 @@
 <%- include('includes/admin/_header') %>
-<div class="card">
-  <div class="card-header text-center">
-    <h6> Courses</h6>
+<div class="row">
+  <div class="col-md-3 position-sticky">
+    <div class="card">
+      <div class="card-header text-center">
+        <h6> <%=course.name%></h6>
+      </div>
+      <div class="card-body">
+        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Update</button>
+        
+      </div>
+    </div>
   </div>
-  <div class="card-body">
-    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Update</button>
-    
+  <div class="col-md-9">
+    <div class="">
+      <div class="card overflow-auto">
+        <div class="card-header text-center">
+          <h6> Subjects</h6>
+        </div>
+        <div class="card-body ">
+          <button type="button" class="btn btn-primary btn-sm mb-5" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Add Subject</button>
+          <h6> First Year</h6>
+          <div class="card mb-4">
+            <div class="card-header">
+              First Semester
+            </div>
+            
+            <div class="card-body">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">course</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Units</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% course.Subjects.forEach(subject => { %>
+                    <% if (subject.yearLvl === "First Year" && subject.sem === "First Semester") { %>
+                      <tr>
+                        <th scope="row"><%= subject.subCode %> </th>
+                        <td><%= subject.description %></td>
+                        <td></td>
+                      </tr>
+                    <% } %>
+                    <% }) %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              Second Semester
+            </div>
+            
+            <div class="card-body">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">course</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Units</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% course.Subjects.forEach(subject => { %>
+                    <% if (subject.yearLvl === "First Year" && subject.sem === "Second Semester") { %>
+                      <tr>
+                        <th scope="row"><%= subject.subCode %> </th>
+                        <td><%= subject.description %></td>
+                        <td></td>
+                      </tr>
+                    <% } %>
+                    <% }) %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- Second Year-->
+          <h6 class="mt-5"> Second Year</h6>
+          <div class="card mb-4">
+            <div class="card-header">
+              First Semester
+            </div>
+            
+            <div class="card-body">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">course</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Units</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% course.Subjects.forEach(subject => { %>
+                    <% if (subject.yearLvl === "Second Year" && subject.sem === "First Semester") { %>
+                      <tr>
+                        <th scope="row"><%= subject.subCode %> </th>
+                        <td><%= subject.description %></td>
+                        <td></td>
+                      </tr>
+                    <% } %>
+                    <% }) %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              Second Semester
+            </div>
+            
+            <div class="card-body">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">course</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Units</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% course.Subjects.forEach(subject => { %>
+                    <% if (subject.yearLvl === "Second Year" && subject.sem === "Second Semester") { %>
+                      <tr>
+                        <th scope="row"><%= subject.subCode %> </th>
+                        <td><%= subject.description %></td>
+                        <td></td>
+                      </tr>
+                    <% } %>
+                    <% }) %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!--Third Year-->
+          <h6 class="mt-5"> Third Year</h6>
+          <div class="card mb-4">
+            <div class="card-header">
+              First Semester
+            </div>
+            
+            <div class="card-body">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">course</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Units</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% course.Subjects.forEach(subject => { %>
+                    <% if (subject.yearLvl === "Third Year" && subject.sem === "First Semester") { %>
+                      <tr>
+                        <th scope="row"><%= subject.subCode %> </th>
+                        <td><%= subject.description %></td>
+                        <td></td>
+                      </tr>
+                    <% } %>
+                    <% }) %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              Second Semester
+            </div>
+            
+            <div class="card-body">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">course</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Units</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% course.Subjects.forEach(subject => { %>
+                    <% if (subject.yearLvl === "Third Year" && subject.sem === "Second Semester") { %>
+                      <tr>
+                        <th scope="row"><%= subject.subCode %> </th>
+                        <td><%= subject.description %></td>
+                        <td></td>
+                      </tr>
+                    <% } %>
+                    <% }) %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
+
+
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog ">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">New Course</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Add Subjects</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body overflow-auto">
       <!-- Form here -->
-      <form action="/admin/courses" method="POST">
-        <div class="form-group mb-2">
-          <label for="name">Course</label>
-          <input type="text" class="form-control" name="name" id="name" placeholder="Course Name">
+      <form action="/admin/courses/<%= course.uuid %>/add-subjects" method="POST">
+        <div class="overflow-auto">
+          
         </div>
-        <input type="submit" class="btn btn-primary" value="Submit">
+        <ul class="list-group mb-4">
+          <% subjects.forEach((subject, index) => { %>
+            <li class="list-group-item">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="<%=subject.uuid%>" name="subject<%=index%>"id="<%=subject.uuid%>">
+                <label class="form-check-label" for="<%=index%>">
+                  <%=subject.subCode%> (<%=subject.description%>)
+                </label>
+              </div>
+            </li>
+          <% }) %>
+
+        </ul>
+        <input type="submit" value="Submit" class="btn btn-primary">
+        
       </form>
       
       </div>
     </div>
   </div>
 </div>
+
 <%- include('includes/admin/_footer') %>
 
