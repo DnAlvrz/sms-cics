@@ -1,22 +1,23 @@
 <!-- The sidebar -->
 <div class="sidebar">
   <ul class="nav flex-column" ">
-    <li class="nav-item active">
+    <li class="nav-item <% if(path === 'admin'){ %>active <% }%>">
       <a class="nav-link" href="/admin"> Home </a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item  <% if(path === 'schoolyears'){ %>active <% }%>">
       <a class="nav-link" href="/admin/schoolyears"> School Year </a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item <% if(path === 'semesters'){ %>active <% }%>">
       <a class="nav-link" href="/admin/semesters"> Semesters</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="/admin/courses"> Courses</a>
+    
+    <li class="nav-item <% if(path === 'courses'){ %>active <% }%>">
+      <a class="nav-link  " href="/admin/courses"> Courses</a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item <% if(path === 'subjects'){ %>active <% }%>">
       <a class="nav-link" href="/admin/subjects"> Subjects</a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item <% if(path === 'students'){ %>active <% }%>">
       <a class="nav-link" href="/admin/students"> Students</a>
     </li>
     <li class="nav-item">

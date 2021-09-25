@@ -5,7 +5,7 @@ module.exports.list = async (req,res) => {
   try{
     const students = await User.findAll({where:{roles:'student'}, include:'course'});
     const courses = await Course.findAll();
-    res.render('admin/student/list', {students:students, courses:courses})
+    res.render('admin/student/list', {students:students, courses:courses, path:"students"})
   } catch(error) {
     console.log(error);
     res.render('500', {error:error})

@@ -4,6 +4,7 @@ const express = require('express'),
   dotenv=require('dotenv'),
   morgan = require('morgan'),
   path = require('path'),
+  methodOverride = require('method-override'),
   flash = require('express-flash'),
   session = require('express-session'),
   passport = require('passport'),
@@ -15,6 +16,8 @@ initPassport(passport);
 dotenv.config({path:'.env'})
 const PORT = process.env.PORT || 8080;
 
+app.use(methodOverride('_method'));
+
 //log requests
 app.use(morgan('dev'));
 
@@ -23,9 +26,12 @@ app.use('/css', express.static(path.resolve(__dirname, 'assets/css')));
 app.use('/js', express.static(path.resolve(__dirname, 'assets/js')));
 app.use('/img', express.static(path.resolve(__dirname, 'assets/img')));
 
+
+
 //parse request to body parser.
 app.use(express.json({limit:'10mb'}));
 app.use(express.urlencoded({extended:true}));
+
 
 app.use(flash());
 app.use(session({

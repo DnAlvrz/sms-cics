@@ -3,7 +3,7 @@ const  {Subject, Course} = require('../../../models');
 module.exports.list = async (req,res) => {
   try {
     const subjects = await Subject.findAll();
-    res.render('admin/subjects/list', {subjects:subjects});
+    res.render('admin/subjects/list', {subjects:subjects, path:'subjects'});
   } catch (error) {
     res.render('500', {error:error})
   }
@@ -24,6 +24,6 @@ module.exports.new = async (req,res) => {
     res.redirect('/admin/subjects');
   } catch (error) {
     console.log(error);
-    res.render('500', {error:error})
+    res.render('500', {error:error,  path:'error'})
   }
 }

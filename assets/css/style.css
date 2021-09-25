@@ -54,3 +54,29 @@ div.content {
 .main-content {
   padding: 20px;
 }
+
+
+
+@media print {
+  .sidebar {
+    display: none;
+  }
+  body *:not(#printable-area):not(#printable-area *){
+    visibility: hidden;
+    z-index: -1 !important;
+    
+  }
+  .sidebar {
+    display: none;
+  }
+  
+  #printable-area, #printable-area *:not(#remove-print){
+    visibility: visible;
+  }
+  #printable-area {
+    z-index: 1 !important;
+    position: absolute;
+    top: -5em;
+    left: 0;
+  }
+}

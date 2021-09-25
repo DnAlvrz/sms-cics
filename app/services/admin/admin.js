@@ -10,7 +10,7 @@ module.exports.home = async (req,res) => {
       },
       include: 'course'
   });
-    res.render('admin/home', {users:user});
+    res.render('admin/home', {users:user, path:'admin'});
   } catch (error) {
     console.log(error);
 
@@ -20,11 +20,11 @@ module.exports.home = async (req,res) => {
 module.exports.schoolYear = async (req,res) => {
   try {
     const schoolyears = await AcademicYear.findAll();
-    res.render('admin/schoolyears', { schoolyears: schoolyears});
+    res.render('admin/schoolyears', { schoolyears: schoolyears, path:'schoolyears'});
   } catch (error) {
     res.render('500')
   }
-  res.render('admin/schoolyears')
+  res.render('admin/schoolyears',  {path:'schoolyears'})
 }
 
 module.exports.newSchoolYear = async (req,res) => {
@@ -38,7 +38,7 @@ module.exports.newSchoolYear = async (req,res) => {
     try {
       const newSY = await AcademicYear.create(data);
     } catch (error) {
-      res.render('500.ejs', {error:error})
+      res.render('500.ejs', {error:error, path:'error'})
     }
     res.status(201).redirect('/admin/schoolyears')
   }
@@ -56,7 +56,7 @@ module.exports.semester = async (req,res) => {
     }]
   });
    const schoolyears = await AcademicYear.findAll();
-   res.render('admin/semesters',{semesters:semesters, schoolyears:schoolyears});
+   res.render('admin/semesters',{semesters:semesters, schoolyears:schoolyears,path:'semesters'});
  } catch (error) {
    res.render('500.ejs', {error:error})
  }

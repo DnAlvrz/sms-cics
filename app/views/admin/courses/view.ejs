@@ -3,22 +3,26 @@
   <div class="col-md-3 position-sticky">
     <div class="card">
       <div class="card-header text-center">
-        <h6> <%=course.name%></h6>
+        <h6> Course</h6>
       </div>
       <div class="card-body">
-        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Update</button>
-        
+        <form action="/admin/courses/<%=course.uuid%>?_method=PUT" method="POST">
+          <label for="name" class="form-label">Name</label>
+          <input type="text" value="<%= course.name %>" name="name" class="mb-1">
+          <input type="submit" value="Submit" class="btn btn-primary btn-sm">
+        </form>
       </div>
     </div>
   </div>
   <div class="col-md-9">
-    <div class="">
-      <div class="card overflow-auto">
-        <div class="card-header text-center">
-          <h6> Subjects</h6>
-        </div>
-        <div class="card-body ">
-          <button type="button" class="btn btn-primary btn-sm mb-5" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Add Subject</button>
+    <div class="card ">
+      <div class="card-header text-center">
+        <h6> Subjects</h6>
+      </div>
+      <div class="card-body ">
+        <button class="btn btn-info btn-sm mb-5" onclick="window.print()">Print</button>
+        <button type="button" class="btn btn-primary btn-sm mb-5" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Add Subject</button>
+        <div id="printable-area">
           <h6> First Year</h6>
           <div class="card mb-4">
             <div class="card-header">
@@ -29,18 +33,22 @@
               <table class="table table-hover">
                 <thead>
                   <tr>
+                    <th scope="col">FG</th>
                     <th scope="col">course</th>
                     <th scope="col">Description</th>
                     <th scope="col">Units</th>
+                    <th scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   <% course.Subjects.forEach(subject => { %>
                     <% if (subject.yearLvl === "First Year" && subject.sem === "First Semester") { %>
                       <tr>
+                        <td>3</td>
                         <th scope="row"><%= subject.subCode %> </th>
                         <td><%= subject.description %></td>
-                        <td></td>
+                        <td>3</td>
+                        <td><a href="/admin/courses/remove/<%=course.uuid%>/<%= subject.id %>">Remove</td>
                       </tr>
                     <% } %>
                     <% }) %>
@@ -58,17 +66,21 @@
               <table class="table table-hover">
                 <thead>
                   <tr>
+                    <th scope="col">FG</th>
                     <th scope="col">course</th>
                     <th scope="col">Description</th>
                     <th scope="col">Units</th>
+                    <th scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   <% course.Subjects.forEach(subject => { %>
                     <% if (subject.yearLvl === "First Year" && subject.sem === "Second Semester") { %>
                       <tr>
+                        <td></td>
                         <th scope="row"><%= subject.subCode %> </th>
                         <td><%= subject.description %></td>
+                        <td></td>
                         <td></td>
                       </tr>
                     <% } %>
@@ -151,6 +163,7 @@
                     <th scope="col">course</th>
                     <th scope="col">Description</th>
                     <th scope="col">Units</th>
+                    <th scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -159,6 +172,7 @@
                       <tr>
                         <th scope="row"><%= subject.subCode %> </th>
                         <td><%= subject.description %></td>
+                        <td>3</td>
                         <td></td>
                       </tr>
                     <% } %>
