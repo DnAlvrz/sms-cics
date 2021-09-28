@@ -55,8 +55,6 @@ div.content {
   padding: 20px;
 }
 
-
-
 @media print {
   .sidebar {
     display: none;

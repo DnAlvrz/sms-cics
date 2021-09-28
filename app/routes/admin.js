@@ -28,10 +28,16 @@ router.get('/courses/:uuid', adminCourseRoutes.view);
 router.put('/courses/:uuid', adminCourseRoutes.update);
 router.post('/courses/:uuid/add-subjects', adminCourseRoutes.addsubjects);
 router.get('/courses/remove/:uuid/:id', adminCourseRoutes.removesubject);
+
 // Students
 router.get('/students', adminStudentRoutes.list);
 router.post('/students', adminStudentRoutes.new);
+
 // Subjects
+router.get('/subjects', adminSubjectRoutes.list);
+router.post('/subjects', adminSubjectRoutes.new);
+
+// Classes
 router.get('/subjects', adminSubjectRoutes.list);
 router.post('/subjects', adminSubjectRoutes.new);
 

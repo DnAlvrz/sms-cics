@@ -1,4 +1,3 @@
-const { restart } = require('nodemon');
 const  {Course, User, Subject} = require('../../../models')
 
 module.exports.course = async (req,res) => {

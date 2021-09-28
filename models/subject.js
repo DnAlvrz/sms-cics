@@ -38,6 +38,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull:false
     },
+    units : {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    }
     
   }, {
     sequelize,
