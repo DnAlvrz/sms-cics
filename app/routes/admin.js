@@ -4,6 +4,7 @@ const adminRoutes = require('../services/admin/admin');
 const adminCourseRoutes = require('../services/admin/course');
 const adminStudentRoutes = require('../services/admin/student');
 const adminSubjectRoutes = require('../services/admin/subject');
+const adminClassRoutes = require('../services/admin/classes');
 
 router.use((req,res, next) => {
   if(req.user.roles === "admin" || req.user.roles === "superadmin" ){
@@ -38,8 +39,8 @@ router.get('/subjects', adminSubjectRoutes.list);
 router.post('/subjects', adminSubjectRoutes.new);
 
 // Classes
-router.get('/subjects', adminSubjectRoutes.list);
-router.post('/subjects', adminSubjectRoutes.new);
+router.get('/classes', adminClassRoutes.list);
+router.post('/classes', adminClassRoutes.new);
 
 
 module.exports = router;

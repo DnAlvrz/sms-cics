@@ -1,50 +1,29 @@
 <%- include('includes/admin/_header') %>
 <div class="card">
   <div class="card-header text-center">
-    <h6> Students</h6>
+    <h6> Classes</h6>
   </div>
   <div class="card-body">
-    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">New Student</button>
+    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">New Class</button>
     <table class="table">
       <thead>
         <tr>
-          <th scope="col">School ID</th>
-          <th scope="col">Firstname</th>
-          <th scope="col">Lastname</th>
+          <th scope="col">Subject</th>
+          <th scope="col">Description</th>
           <th scope="col">Course</th>
-          <th scope="col">Email</th>
-          <th scope="col">Contact No</th>
+          <th scope="col">Number of Students</th>
+          <th scope="col">Time</th>
         </tr>
       </thead>
       <tbody>
-        <% if (students.length > 0) { %>
-          <% students.forEach(student => { %>
-            <tr>
-              <th><%= student.schoolId %></th>
-              <td> <%= student.firstname %></td>
-              <td>
-                <%= student.lastname %>
-              </td>
-              <td> 
-                <% if(student.course ) {%>
-                  <%= student.course.name %> 
-                <% } else {%>
-                  None
-                <% }  %>
-              </td>
-              <td><%= student.email %></td>
-              <td><%= student.contactNum %></td>
-            </tr>
-          <% }) %>
-        <% } else {%>
-          No Students Yet
-        <% } %>
+        
       </tbody>
     </table>
   </div>
 </div>
+<!--Modal-->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl ">
+  <div class="modal-dialog modal-lg ">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">New Student</h5>
@@ -52,90 +31,59 @@
       </div>
       <div class="modal-body">
       <!-- Form here -->
-      <form action="/admin/students" method="POST">
-        <input type="hidden" name="roles" value="student">
-        <div class="row mb-2">
-          <div class="col-md-4">
-            <div class="form-group ">
-              <label for="studentFirstname">Firstname</label>
-              <input type="text" class="form-control" name="firstname" id="studentFirstname" placeholder="Firstname">
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group ">
-              <label for="studentFirstname">Lastname</label>
-              <input type="text" class="form-control" name="lastname" id="studentFirstname" placeholder="Lastname">
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group ">
-              <label for="studentMiddleName">Middle Name</label>
-              <input type="text" class="form-control" name="middlename  " id="studentMiddleName" placeholder="Middle Name">
-            </div>
-          </div>
-        </div>
-        <div class="row mb-2">
-          <div class="col-md-4">
-            <div class="form-group ">
-              <label for="studentEmail">Email</label>
-              <input type="email" class="form-control" name="email" id="studentEmail" placeholder="Email Address">
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group ">
-              <label for="schoolId">School ID</label>
-              <input type="text" class="form-control" name="schoolId" id="schoolId" placeholder="School ID">
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group ">
-              <label for="password">Password</label>
-              <input type="text" class="form-control" name="password" id="password" placeholder="Password" disabled>
-            </div>
-          </div>
-        </div>
-
-        <div class="row mb-2">
-          <div class="col-md-8">
-            <div class="form-group ">
-              <label for="address">Address</label>
-              <input type="text" class="form-control" name="address" id="address" placeholder="Address">
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group ">
-              <label for="contactNum">Contact No.</label>
-              <input type="text" class="form-control" name="contactNum" id="contactNum" placeholder="Contact Number">
-            </div>
+      <form action="/admin/classes" method="POST">
+       <div class="row">
+         <div class="col-md-2">
+          <div class="mb-3">
+            <label for="section" class="form-label">Section</label>
+            <input class="form-control" placeholder="Section" name="section" type="text">
           </div>
           
+         </div>
+         <div class="col-md-2">
+          <div class="mb-3">
+            <label for="section" class="form-label">Max. Students </label>
+            <input class="form-control" name="maxNumberofStudents" min="0" type="number" max="100">
+          </div>
+         </div>
+         <div class="col-md-4">
+          <label class="form-label" for="schoolId">Course</label>
+          <select class="form-select " name="course" aria-label="Default select example">
+            <option selected>Select Course</option>
+            <% if (courses) { %>
+              <% for( let i = 0; i < courses.length; i++ ) { %>
+                <option value="<%= courses[i].uuid %>"><%= courses[i].name %> </option>
+              <% } %>        
+            <% } %>
+          </select>
         </div>
-        <div class="row">
-          <div class="col-md-4">
-            <div class="form-group mb-2">
-              <label for="birthdate">Birth Date</label>
-              <input type="text" class="form-control" name="birthdate" id="birthdate" placeholder="Birth Date">
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group mb-2">
-              <label for="status">Status</label>
-              <input type="text" class="form-control" name="status" id="status" placeholder="status">
-            </div>
-          </div>
-          <div class="col-md-4">
-            <label for="schoolId">Course</label>
-            <select class="form-select" name="course" aria-label="Default select example">
-              <option selected>Select Course</option>
-              <% if (courses) { %>
-                <% for( let i = 0; i < courses.length; i++ ) { %>
-                  <option value="<%= courses[i].uuid %>"><%= courses[i].name %> </option>
-                <% } %>        
-              <% } %>
-            </select>
-          </div>
+        <div class="col-md-3">
+          <label class="form-label" for="schoolId">Subject</label>
+          <select class="form-select " name="subject" aria-label="Default select example">
+            <option selected>Select Subject</option>
+            <% if (subjects) { %>
+              <% for( let i = 0; i < subjects.length; i++ ) { %>
+                <option value="<%= subjects[i].uuid %>"><%= subjects[i].subCode %> </option>
+              <% } %>        
+            <% } %>
+          </select>
         </div>
-        <input type="submit" class="btn btn-primary" value="Submit">
+       </div>
+       <div class="row">
+        <div class="col-md-3">
+          <label class="form-label" for="start">Schedule</label>
+          <input class="form-control" type="text" id="start" name="schedule" required>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label" for="start">Start Time</label>
+          <input class="form-control" type="time" id="start" name="startTime" min="09:00" max="18:00" required>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label" for="start"> End Time</label>
+          <input class="form-control" type="time" id="start" name="endTime" min="09:00" max="18:00" required>
+        </div>
+       </div>
+        <input type="submit" class="btn btn-primary mt-3" value="Submit">
       </form>
       </div>
     </div>

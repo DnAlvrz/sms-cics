@@ -43,6 +43,11 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use((req, res,next) => {
+  res.locals.currentUser = req.user;
+  next();
+})
+
 //set view engine
 app.set('view engine', 'ejs')
 app.set('views', [path.join(__dirname, 'app/views'),path.join(__dirname, 'app/views/admin')]);
@@ -128,5 +133,5 @@ sequelize.authenticate()
     });
   })
   .catch(err=> {
-    console.log(err)
+    console.log(err);
   })

@@ -9,13 +9,14 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({Semester, Grade, User,Subject}) {
+    static associate({Semester, Grade, User,Subject, Course}) {
       // define association here
       this.belongsTo(Semester, {foreignKey: 'semesterId'});
       this.belongsTo(Subject, {foreignKey: 'subjectId'});
+      this.belongsTo(Course, {foreignKey: 'courseId'});
       this.belongsTo(User, {foreignKey: 'teacherId'});
       this.belongsToMany(User, {through: 'ClassList'})
-      this.hasMany(Grade, {foreignKey: 'subjectId'})
+      //this.hasMany(Grade, {foreignKey: 'subjectId'})
     }
   };
   Class.init({
@@ -25,15 +26,24 @@ module.exports = (sequelize, DataTypes) => {
     },
     subjectId: {
       type: DataTypes.INTEGER,
-      allowNull: false
     },
     teacherId: {
       type: DataTypes.INTEGER,
     },
-    semesterId: {
+    courseId: {
       type: DataTypes.INTEGER,
-      allowNull: false
     },
+    semesterId: {
+      type: DataTypes.INTEGER
+    },
+    maxNumberofStudents:{
+      type: DataTypes.INTEGER,
+      allowNull:false
+    },
+    schedule: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }, 
     startTime : {
       type: DataTypes.TIME,
       defaultValue: '7:30:00'

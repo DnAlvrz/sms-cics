@@ -10,7 +10,7 @@ module.exports.home = async (req,res) => {
       },
       include: 'course'
   });
-    res.render('admin/home', {users:user, path:'admin'});
+    res.render('admin/home', {users:user, path:'admin',user:req.user});
   } catch (error) {
     console.log(error);
 
@@ -24,7 +24,7 @@ module.exports.schoolYear = async (req,res) => {
   } catch (error) {
     res.render('500')
   }
-  res.render('admin/schoolyears',  {path:'schoolyears'})
+  res.render('admin/schoolyears',  {path:'schoolyears',user:req.user})
 }
 
 module.exports.newSchoolYear = async (req,res) => {

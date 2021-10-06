@@ -1,4 +1,4 @@
-const {User} = require('../../models');
+
 
 module.exports.createObject = (reqBody) => {
   const data = {};

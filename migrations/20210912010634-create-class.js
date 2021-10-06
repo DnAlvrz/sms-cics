@@ -10,7 +10,22 @@ module.exports = {
       },
       subjectId: {
         type: Sequelize.INTEGER,
+
+      },
+      teacherId: {
+        type: Sequelize.INTEGER,
+      },
+      courseId: {
+        type: Sequelize.INTEGER,
+
+      }, 
+      schedule: {
+        type: Sequelize.STRING,
         allowNull: false
+      }, 
+      maxNumberofStudents:{
+        type: Sequelize.INTEGER,
+        allowNull:false
       },
       semesterId: {
         type: Sequelize.INTEGER,
