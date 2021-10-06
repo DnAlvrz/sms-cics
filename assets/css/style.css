@@ -1,3 +1,126 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* ---------- Log in css ------------ */
+
+.login-container{
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.right-wing{
+  background: #8DCBEE;
+  height: 100vh;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.left-wing{
+  background: #000;
+  height: 100vh;
+  width: 50%;
+}
+.left-logo{
+  height: 150px;
+  width: auto;
+  padding: 2rem;
+}
+.right-logo{
+ height: 250px;
+}
+.login-form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.login-label{
+width: 109px;
+height: 29px;
+font-family: 'Roboto', sans-serif;
+font-style: normal;
+font-weight: normal;
+font-size: 24px;
+line-height: 28px;
+text-align: center;
+color: #fff;
+margin-left: 30px;
+margin-top: 10px;
+}
+.login-input{
+width: 461px;
+height: 41px;
+background: #C4C4C4;
+outline: none;
+border: none;
+border-radius: 5px;
+margin-left: 30px;
+padding: 5px;
+margin-bottom: 15px;
+}
+.login-input:focus{
+  background-color: #fff;
+  color: #000;
+}
+.login-title{
+  margin-left: 130px;
+  width: 456px;
+  height: 99px;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 5em;
+  font-size: 36px;
+  line-height: 42px;
+  color: white;
+  text-align: center;
+  margin-top: 30px;
+}
+.login-btn{
+  margin-left: 30%;
+  margin-top: 15px;
+  width: 176px;
+  height: 43px;
+  border-radius: 13px;
+  border: none;
+  outline: none;
+  background: #C4C4C4;
+  color: #000;
+}
+.login-btn:hover{
+  background-color: #fff;
+  color: #000;
+}
+/* ------- X -- LOG IN -- X -------*/
+
+
+
+/* ------- Home page ---------*/
+
+header{
+  width: 1440px;
+  height: 96px;
+  background: #8DCBEE;
+  border: 1px solid #7784A5;
+  text-align: center;
+}
+.index-title{
+  text-justify: inter-word;
+}
+
+
+
+
+
+
+
+
+/* ------- X -- HOME PAGE -- X --------*/
+
 .sidebar {
   margin: 0;
   padding: 0;
@@ -54,6 +177,8 @@ div.content {
 .main-content {
   padding: 20px;
 }
+
+
 
 @media print {
   .sidebar {

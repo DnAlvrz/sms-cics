@@ -1,15 +1,42 @@
-<h1>Log in </h1>
-<% if(messages.error) {%>
-  <%= messages.error%>
-<%}%>
-<form action="/login" method="post">
-  <div> 
-    <label for="schoolId">School ID</label>
-    <input type="text" name="schoolId" id="schoolId" placeholder="Enter School ID">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="login-container">
+
+    <div class="right-wing">
+        <img class="right-logo" src="/img/logo.png" alt="">
+    </div>
+
+    <div class="left-wing">
+      <img class="left-logo" src="/img/logo-1.png" alt="">
+      <h1 class="login-title">CISC SCHOOL MANAGEMENT SYSTEM</h1>
+
+      <form class="login-form" action="/login" method="post">
+        <label class="login-label" for="schoolId">School ID</label>
+        <div class="input">
+          <input class="login-input" type="text" name="schoolId" id="schoolId" placeholder="Enter School ID">
+        </div>
+
+        <label class="login-label" for="password">Password</label>
+        <div class="input"> 
+          <input class="login-input" type="password" name="password" id="password" placeholder="Enter your password">
+        </div>
+        <input class="login-btn" type="submit" value="Submit">
+      </form>
+      
+      </div>
+              
   </div>
-  <div> 
-    <label for="password">School ID</label>
-    <input type="password" name="password" id="password" placeholder="Enter your password">
-  </div>
-  <input type="submit" value="Submit">
-</form>
+</body>
+</html>
