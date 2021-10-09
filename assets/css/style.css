@@ -384,28 +384,38 @@ div.content {
   padding: 20px;
 }
 
+#_header {
+  display:none;
+}
 
 
 @media print {
+
   .sidebar {
     display: none;
   }
+
   body *:not(#printable-area):not(#printable-area *){
     visibility: hidden;
-    z-index: -1 !important;
-    
+    z-index: 0 !important;
   }
-  .sidebar {
-    display: none;
+
+  #_header {
+    display:block;
+    position: absolute;
+    top: -3em;
+    left: 10em;
   }
-  
+
   #printable-area, #printable-area *:not(#remove-print){
     visibility: visible;
   }
+
   #printable-area {
-    z-index: 1 !important;
+    z-index: 999 !important;
     position: absolute;
+    width: 100%;
     top: -5em;
-    left: 0;
+    left: -5em;
   }
 }
