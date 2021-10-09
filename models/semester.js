@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate({AcademicYear, Class}) {
       // define association here
       this.belongsTo(AcademicYear, {foreignKey: 'schoolYearId', as:'schoolyear'});
-      this.hasMany(Class, {foreignKey: 'semesterId'})
+      //this.hasMany(Class, {foreignKey: 'semesterId'})
     }
   };
   semester.init({

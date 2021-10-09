@@ -11,12 +11,23 @@
           <th scope="col">Subject</th>
           <th scope="col">Description</th>
           <th scope="col">Course</th>
-          <th scope="col">Number of Students</th>
+          <th scope="col">Max. Cap</th>
+          <th scope="col">Schedule</th>
           <th scope="col">Time</th>
         </tr>
       </thead>
       <tbody>
-        
+        <% classes.forEach(Class => { %>
+         <tr>
+           <td > <%=Class['subject'].subCode%> </td>
+           <td>  <%=Class['subject'].description%> </td>
+           <td> <%=Class['course'].name%> </td>
+           <td> <%=Class.maxNumberofStudents%> </td>
+           <td> <%=Class.schedule%> </td>
+           <td> <%=Class.startTime%> -  <%=Class.endTime%>  </td>
+         </tr>
+        <% }) %>
+     
       </tbody>
     </table>
   </div>
@@ -48,7 +59,7 @@
          </div>
          <div class="col-md-4">
           <label class="form-label" for="schoolId">Course</label>
-          <select class="form-select " name="course" aria-label="Default select example">
+          <select class="form-select " name="courseId" aria-label="Default select example">
             <option selected>Select Course</option>
             <% if (courses) { %>
               <% for( let i = 0; i < courses.length; i++ ) { %>
@@ -59,7 +70,7 @@
         </div>
         <div class="col-md-3">
           <label class="form-label" for="schoolId">Subject</label>
-          <select class="form-select " name="subject" aria-label="Default select example">
+          <select class="form-select " name="subjectId" aria-label="Default select example">
             <option selected>Select Subject</option>
             <% if (subjects) { %>
               <% for( let i = 0; i < subjects.length; i++ ) { %>
@@ -70,6 +81,13 @@
         </div>
        </div>
        <div class="row">
+        <div class="col-md-3">
+          <label class="form-label" for="semester">Semester</label>
+          <select class="form-select" id="semester" name="semester" aria-label="Default select example">
+            <option selected value="First Semester">First Semester</option>
+            <option value="Second Semester" >Second Semester</option>
+          </select>
+        </div>
         <div class="col-md-3">
           <label class="form-label" for="start">Schedule</label>
           <input class="form-control" type="text" id="start" name="schedule" required>
