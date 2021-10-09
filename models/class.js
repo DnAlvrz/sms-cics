@@ -11,10 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate({Semester, Grade, User,Subject, Course}) {
       // define association here
-      this.belongsTo(Semester, {foreignKey: 'semesterId'});
-      this.belongsTo(Subject, {foreignKey: 'subjectId'});
-      this.belongsTo(Course, {foreignKey: 'courseId'});
-      this.belongsTo(User, {foreignKey: 'teacherId'});
+      //this.belongsTo(Semester, {foreignKey: 'semesterId'});
+      this.belongsTo(Subject, {foreignKey: 'subjectId', as: 'subject'});
+      this.belongsTo(Course, {foreignKey: 'courseId', as: 'course'});
+      this.belongsTo(User, {foreignKey: 'teacherId', as:'teacher'});
       this.belongsToMany(User, {through: 'ClassList'})
       //this.hasMany(Grade, {foreignKey: 'subjectId'})
     }
@@ -33,8 +33,8 @@ module.exports = (sequelize, DataTypes) => {
     courseId: {
       type: DataTypes.INTEGER,
     },
-    semesterId: {
-      type: DataTypes.INTEGER
+    semester: {
+      type: DataTypes.STRING
     },
     maxNumberofStudents:{
       type: DataTypes.INTEGER,
