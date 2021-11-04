@@ -13,7 +13,6 @@ module.exports.home = async (req,res) => {
     res.render('admin/home', {users:user, path:'home',user:req.user});
   } catch (error) {
     console.log(error);
-
   }
 }
 
