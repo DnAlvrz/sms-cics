@@ -8,6 +8,7 @@ module.exports.list = async (req,res) => {
     res.render('500', {error:error})
   }
 }
+
 module.exports.new = async (req,res) => {
   if(!req.body) {
     res.redirect('admin/home');

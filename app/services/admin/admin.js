@@ -10,7 +10,7 @@ module.exports.home = async (req,res) => {
       },
       include: 'course'
   });
-    res.render('admin/home', {users:user, path:'admin',user:req.user});
+    res.render('admin/home', {users:user, path:'home',user:req.user});
   } catch (error) {
     console.log(error);
 
@@ -20,7 +20,8 @@ module.exports.home = async (req,res) => {
 module.exports.schoolYear = async (req,res) => {
   try {
     const schoolyears = await AcademicYear.findAll();
-    res.render('admin/schoolyears', { schoolyears: schoolyears, path:'schoolyears'});
+    
+    res.render('admin/schoolyears', { schoolyears: schoolyears, path:'schoolyears', message:req.flash('message')});
   } catch (error) {
     res.render('500')
   }
@@ -37,10 +38,12 @@ module.exports.newSchoolYear = async (req,res) => {
     }
     try {
       const newSY = await AcademicYear.create(data);
+      req.flash("message", "School year saved")
+      res.status(201).redirect('/admin/schoolyears')
     } catch (error) {
       res.render('500.ejs', {error:error, path:'error'})
     }
-    res.status(201).redirect('/admin/schoolyears')
+    
   }
 }
 
@@ -95,3 +98,19 @@ module.exports.newSemester = async (req,res) => {
   }
 }
 
+
+module.exports.adminList = async (req,res) => {
+  try {
+    const admins = await User.findAll({
+      where: {
+        [Op.or]: [
+          { roles: 'admin' },
+          { roles: 'superadmin' }
+        ]
+      }
+    });
+    res.render('admin/admin/list', {teachers:admins, path:'admin'});
+  } catch (error) {
+    res.render('500', {error:error})
+  }
+}

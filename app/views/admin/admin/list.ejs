@@ -1,0 +1,125 @@
+<%- include('includes/admin/_header') %>
+<div class="card">
+  <div class="card-header text-center">
+    <h6> TEACHERS</h6>
+  </div>
+  <div class="card-body">
+    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">New teacher</button>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">School ID</th>
+          <th scope="col">Firstname</th>
+          <th scope="col">Lastname</th>
+          <th scope="col">Course</th>
+          <th scope="col">Email</th>
+          <th scope="col">Contact No</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (teachers.length > 0) { %>
+          <% teachers.forEach(teacher => { %>
+            <tr>
+              <th><%= teacher.schoolId %></th>
+              <td> <%= teacher.firstname %></td>
+              <td>
+                <%= teacher.lastname %>
+              </td>
+              <td><%= teacher.email %></td>
+              <td><%= teacher.contactNum %></td>
+            </tr>
+          <% }) %>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg  modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New teacher</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <!-- Form here -->
+      <form action="/admin/teachers" method="POST">
+        <input type="hidden" name="roles" value="teacher">
+        <div class="row mb-2">
+          <div class="col-md-4">
+            <div class="form-group ">
+              <label for="teacherFirstname">Firstname</label>
+              <input type="text" class="form-control" name="firstname" id="teacherFirstname" placeholder="Firstname">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group ">
+              <label for="teacherFirstname">Lastname</label>
+              <input type="text" class="form-control" name="lastname" id="teacherFirstname" placeholder="Lastname">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group ">
+              <label for="teacherMiddleName">Middle Name</label>
+              <input type="text" class="form-control" name="middlename  " id="teacherMiddleName" placeholder="Middle Name">
+            </div>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-md-4">
+            <div class="form-group ">
+              <label for="teacherEmail">Email</label>
+              <input type="email" class="form-control" name="email" id="teacherEmail" placeholder="Email Address">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group ">
+              <label for="schoolId">School ID</label>
+              <input type="text" class="form-control" name="schoolId" id="schoolId" placeholder="School ID">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group ">
+              <label for="password">Password</label>
+              <input type="text" class="form-control" name="password" id="password" placeholder="Password" disabled>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-md-8">
+            <div class="form-group ">
+              <label for="address">Address</label>
+              <input type="text" class="form-control" name="address" id="address" placeholder="Address">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group ">
+              <label for="contactNum">Contact No.</label>
+              <input type="text" class="form-control" name="contactNum" id="contactNum" placeholder="Contact Number">
+            </div>
+          </div>
+          
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group mb-2">
+              <label for="birthdate">Birth Date</label>
+              <input type="text" class="form-control" name="birthdate" id="birthdate" placeholder="Birth Date">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group mb-2">
+              <label for="status">Status</label>
+              <input type="text" class="form-control" name="status" id="status" placeholder="status">
+            </div>
+          </div>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Submit">
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+<%- include('includes/admin/_footer') %>
+

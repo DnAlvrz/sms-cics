@@ -128,7 +128,7 @@ sequelize.authenticate()
       console.log(error)
     }
     console.log("Database connected")
-    app.listen(PORT, () => {
+    app.listen(8080, () => {
       console.log(`Server ${process.pid} is running on http://localhost:${PORT}`);
     });
   })

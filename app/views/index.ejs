@@ -24,7 +24,9 @@
                     <div class="dropdown">
                         <button class="dropbtn">Profile</button>
                         <div class="dropdown-content">
+                          <% if (currentUser.roles==="admin" || currentUser.roles==="superadmin") { %>
                             <a href="/admin">Admin</a>
+                          <% } %>
                             <a href="/logout">Logout</a>
                         </div>
                       </div>
