@@ -9,11 +9,12 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({Semester}) {
+    static associate({Semester, Class}) {
       // define association here
-      this.hasMany(Semester, {foreignKey: 'schoolYearId'})
+      this.hasMany(Semester, {foreignKey: 'schoolYearId', as:'semesters'});
+      this.hasMany(Class, {foreignKey: 'schoolYearId', as:'subjects'})
     }
-  };
+  };  
   AcademicYear.init({
     uuid: {
       type: DataTypes.UUID,

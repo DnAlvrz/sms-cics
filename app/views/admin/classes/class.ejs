@@ -1,0 +1,240 @@
+<%- include('includes/admin/_header') %>
+<div class="row">
+  <div class="col-md-3 position-sticky">
+    <div class="card">
+      <div class="card-header text-center">
+        <h6> Class</h6>
+      </div>
+      <div class="card-body">
+        <form action="<%=clas.id%>?_method=PUT" method="POST">
+
+             <div class="mb-3">
+               <label for="section" class="form-label">Section</label>
+               <input class="form-control" placeholder="Section" value="<%= clas.section %>" name="section" type="text">
+             </div>
+
+             <div class="mb-3">
+               <label for="section" class="form-label">Max. Students </label>
+               <input class="form-control" name="maxNumberofStudents" value="<%= clas.maxNumberofStudents %>"min="0" type="number" max="100">
+             </div>
+
+
+             <label class="form-label" for="schoolId">Course</label>
+             <select class="form-select " name="courseUUID" aria-label="Default select example">
+               <option selected>Select Course</option>
+               <% if (courses) { %>
+                 <% for( let i = 0; i < courses.length; i++ ) { %>
+                   <option <%if(clas.course.id===courses[i].id) {%> selected <%}%>
+                   value="<%= courses[i].uuid %>"><%= courses[i].name %> </option>
+                 <% } %>        
+               <% } %>
+             </select>
+
+             <label class="form-label" for="schoolId">Subject</label>
+             <select class="form-select " name="subjectUUID" aria-label="Default select example">
+               <option selected>Select Subject</option>
+               <% if (subjects) { %>
+                 <% for( let i = 0; i < subjects.length; i++ ) { %>
+                   <option <%if(clas.subject.id===subjects[i].id) {%> selected <%}%> value="<%= subjects[i].uuid %>"><%= subjects[i].subCode %> </option>
+                 <% } %>        
+               <% } %>
+             </select>
+             <label class="form-label" for="semester">Semester</label>
+             <select class="form-select" id="semester" name="semester" aria-label="Default select example">
+               <option selected value="First Semester">First Semester</option>
+               <option value="Second Semester" >Second Semester</option>
+             </select>
+
+
+             <label class="form-label" for="start">Schedule</label>
+             <input class="form-control" type="text" value="<%= clas.schedule %>" id="start" name="schedule" required>
+
+            <label class="form-label" for="start">Start Time</label>
+             <input class="form-control" type="time" id="start" name="startTime" value="<%= clas.startTime %>" min="09:00" max="18:00" required>
+
+
+             <label class="form-label" for="start"> End Time</label>
+             <input class="form-control" type="time" id="start" name="endTime" value="<%= clas.endTime %>" min="09:00" max="18:00" required>
+
+
+          <div class="col-md-5">
+           <label for="schoolyearId" class="col-form-label" required>Year:</label>
+           <select class="form-select" multiple aria-label="multiple select example" name="schoolyearUUID">
+             <% schoolyears.forEach(schoolyear => { %>
+               <option value="<%=schoolyear.uuid%>" <% if (clas.schoolyear.id === schoolyear.id) { %>
+                 selected
+               <% } %>> <%= schoolyear.year %> </option>
+             <% }) %>
+           </select>
+         </div>
+           <input type="submit" class="btn btn-primary mt-3" value="Submit">
+         </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-9">
+    <div class="card ">
+      <div class="card-header text-center">
+        <h6> Class List</h6>
+      </div>
+      <div class="card-body ">
+        <button class="btn btn-info btn-sm mb-5" onclick="window.print()">Print</button>
+        <button type="button" class="btn btn-primary btn-sm mb-5" data-bs-toggle="modal" data-bs-target="#teacherModal" data-bs-whatever="@mdo">Add Teacher</button>
+        <button type="button" class="btn btn-primary btn-sm mb-5" data-bs-toggle="modal" data-bs-target="#studentModal" data-bs-whatever="@mdo">Add Students</button>
+        <div id="printable-area">
+          <div class="">
+            <h6 >Subject: <%= clas.subject.subCode%></h6>
+            <% if (clas.teacher) { %>
+              <h6>Instructor: <%=clas.teacher.firstname%> <%=clas.teacher.lastname%></h6>
+            <% } else {%>
+              <h6>Instructor: TBD</h6>
+            <% } %>
+            <h6> <%= clas.semester %> of <%= clas.schoolyear.year %></h6>
+          </div>
+          <div class="card mb-4">
+            <div class="card-header">
+              Class List
+            </div>
+            
+            <div class="card-body">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Lastname</th>
+                    <th scope="col">Firstname</th>
+                    <th scope="col">Course</th>
+                    <th scope="col">Grade</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% if ( typeof clas.students !== "undefined" ) { %>
+                    <% if (clas.students.length > 0) { %>
+                      <% clas.students.forEach(student => { %>
+                        <tr>
+                          <th><%= student.schoolId %></th>
+                          <td><%= student.lastname %></td>
+                          <td> <%= student.firstname %></td>
+                          <td> 
+                            <% if(student.course ) {%>
+                              <%=student.course.name %> 
+                            <% } else {%>
+                              None
+                            <% }  %>
+                          </td>
+                          <td>
+                            <% if(!clas.grades.length) {%>
+                              <form action="/admin/classes/<%=clas.id%>/grades/<%=student.id%>?_method=PUT" method="post">
+                                <input style="width: 50px;" type="text" name="grade" id="studentgrade">
+                                <input type="submit" value="submit" class="btn btn-success">
+                              </form>
+                            <% } else {%>
+                              <% let match = false;%>
+                              <% let matchGrade = false;%>
+                              <%for(let i = 0; i < clas.grades.length; i++){%>
+                                <% if(clas.grades[i].studentId===student.id ) {%>
+                                  <% match = true;%>
+                                  <% matchGrade = clas.grades[i].grade%>
+                                <% } %>
+                              <%}%>
+                              <form action="/admin/classes/<%=clas.id%>/grades/<%=student.id%>?_method=PUT" method="post">
+                                <input style="width: 50px;" type="text" <% if(match ) {%> value="<%=matchGrade%>" <% } %>name="grade" id="studentgrade">
+                                <input type="submit" value="submit" class="btn btn-success">
+                              </form>
+                            <% } %>
+                          </td>
+                          <td><%= student.contactNum %></td>
+                        </tr>
+                      <% }) %>
+                    <% } %>
+                  <% } %>
+                </tbody>
+              </table>
+            </div>
+          </div>          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="teacherModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Teacher</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body overflow-auto">
+      <!-- Form here -->
+      <form action="/admin/classes/<%=clas.id%>/add-teacher" method="POST">
+        <div class="overflow-auto">
+          <% if (teachers) { %>
+            <ul class="list-group mb-4">
+              <% teachers.forEach(teacher => { %>
+                <li class="list-group-item">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="teacheruuid" value="<%=teacher.uuid%>" id="<%=teacher.uuid%>">
+                    <label class="form-check-label" for="<%=teacher.uuid%>">
+                      <%=teacher.firstname%> <%=teacher.lastname%>
+                    </label>
+                  </div>
+                </li>
+                <% }) %>
+            </ul>
+          <% } %>
+        </div>
+        <ul class="list-group mb-4">
+
+        </ul>
+        <input type="submit" value="Submit" class="btn btn-primary">
+        
+      </form>
+      
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="studentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Teacher</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body overflow-auto">
+      <!-- Form here -->
+      <form action="/admin/classes/<%=clas.id%>/add-student" method="POST">
+        <div class="overflow-auto">
+          <% if (students) { %>
+            <ul class="list-group mb-4">
+              <% students.forEach(student => { %>
+                <li class="list-group-item">
+                  <div class="form-check">
+                    <input class="rm-check-input" type="checkbox" name="<%=student.uuid%>" value="<%=student.uuid%>" id="<%=student.uuid%>">
+                    <label class="form-check-label" for="<%=student.uuid%>">
+                      <%=student.firstname%> <%=student.lastname%>
+                    </label>
+                  </div>
+                </li>
+                <% }) %>
+            </ul>
+          <% } %>
+        </div>
+        <ul class="list-group mb-4">
+
+        </ul>
+        <input type="submit" value="Submit" class="btn btn-primary">
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<%- include('includes/admin/_footer') %>
+

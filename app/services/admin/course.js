@@ -60,7 +60,7 @@ module.exports.view = async (req,res) => {
   const course = await Course.findOne({where:{uuid}, include: [{model:Subject, through: {as:'coursesubjects'}}]});
   const subjects = await Subject.findAll();
   if(course) {
-    res.render('admin/courses/view', {course:course, subjects:subjects, path:"courses"})
+    res.render('admin/courses/view', {course:course, subjects:subjects, path:"courses", message:req.flash('message')})
   }
 }
 

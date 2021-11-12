@@ -17,6 +17,9 @@ module.exports = {
       courseId: {
         type: Sequelize.INTEGER,
       }, 
+      schoolYearId: {
+        type: Sequelize.INTEGER,
+      }, 
       schedule: {
         type: Sequelize.STRING,
         allowNull: false

@@ -54,7 +54,6 @@ module.exports.update = async(req, res) => {
   }update
 };
 
-
 module.exports.delete  = async (req, res) => {
   const uuid = req.params.uuid;
   try {

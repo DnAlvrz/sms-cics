@@ -4,7 +4,7 @@ module.exports.get = async (req, res) => {
   try {
     const courses = await Course.findAll();
     res.status(200).json(courses)
-    
+
   } catch (error) {
     console.log(error)
     res.status(500).json({message:"Something went wrong"})
@@ -20,7 +20,7 @@ module.exports.create = async (req, res) => {
   for (const key of Object.keys(req.body)) {
     data[key] = req.body[key]
   }
-  
+
   try {
     //const user = await User.findOne({where:{uuid:data.uuid}});
     const course = await Course.create(data);
@@ -43,7 +43,7 @@ module.exports.find = async(req, res) => {
 }
 
 module.exports.update = async(req, res) => {
-  const uuid = req.params.uuid  
+  const uuid = req.params.uuid
   try {
     const course = await Course.findOne({where: {uuid}})
     for (const key of Object.keys(req.body)) {
@@ -51,11 +51,10 @@ module.exports.update = async(req, res) => {
     }
     const updatedCourse = await course.save();
     res.status(201).json(updatedCourse);
-    
   } catch (error) {
     console.log(error)
     res.status(500).json({message:"Something went wrong"});
-  }update
+  }
 }
 
 module.exports.delete = async (req, res) => {
@@ -82,7 +81,7 @@ module.exports.addUser = async (req, res) => {
     console.log(err)
     res.status(500).json({message:"Something went wrong"});
   }
-  
+
 }
 
 

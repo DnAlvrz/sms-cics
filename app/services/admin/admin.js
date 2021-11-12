@@ -16,15 +16,13 @@ module.exports.home = async (req,res) => {
   }
 }
 
-module.exports.schoolYear = async (req,res) => {
+module.exports.schoolYear = async (req, res) => {
   try {
-    const schoolyears = await AcademicYear.findAll();
-    
-    res.render('admin/schoolyears', { schoolyears: schoolyears, path:'schoolyears', message:req.flash('message')});
+    const schoolyears = await AcademicYear.findAll({include:['subjects','semesters']});    
+    res.render('admin/schoolyears', { schoolyears, path:'schoolyears', message:req.flash('message')});
   } catch (error) {
     res.render('500')
   }
-  res.render('admin/schoolyears',  {path:'schoolyears',user:req.user})
 }
 
 module.exports.newSchoolYear = async (req,res) => {
@@ -46,6 +44,24 @@ module.exports.newSchoolYear = async (req,res) => {
   }
 }
 
+module.exports.updateSchoolYear = async (req, res) => {
+  const uuid = req.params.uuid;
+  if(!req.body) {
+    res.status(400).json({message:"Please send valid json data."})
+  } else {
+    try {
+      const schoolyear = await AcademicYear.findOne({where:{uuid}});
+      for(const key of Object.keys(req.body)) {
+        schoolyear[key] = req.body[key];
+      }
+      const updateSchoolYear = await schoolyear.save();
+      res.status(200).json(updateSchoolYear)
+    } catch (error) {
+      console.log(error)
+      res.status(200).json({message: "Something went wrong"})
+    }
+  }
+}
 module.exports.semester = async (req,res) => {
  try {
    const semesters = await Semester.findAll({
@@ -79,24 +95,6 @@ module.exports.newSemester = async (req,res) => {
     res.status(201).redirect('/admin/schoolyears')
   }
 }
-
-module.exports.newSemester = async (req,res) => {
-  if(!req.body) {
-    res.render('admin/schoolyear');
-  } else {
-    const name = req.body.name;
-    const schoolYearUUID = req.body.schoolyearId
-    try {
-      const newSem = await Semester.create({name:name});
-      const schoolYear = await AcademicYear.findOne({where:{uuid:schoolYearUUID}});
-      schoolYear.addSemester(newSem);
-    } catch (error) {
-      res.render('500.ejs', {error:error})
-    }
-    res.status(201).redirect('/admin/schoolyears')
-  }
-}
-
 
 module.exports.adminList = async (req,res) => {
   try {

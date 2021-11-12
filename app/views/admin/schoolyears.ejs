@@ -22,10 +22,9 @@
       <thead>
         <tr>
           <th scope="col">School Year</th>
-          <th scope="col">Students</th>
           <th scope="col">Semesters</th>
           <th scope="col">Subjects</th>
-          <th scope="col">Subjects</th>
+          <th scope="col">Status</th>
           <th scope="col">Action</th>
           
 
@@ -35,10 +34,10 @@
         <% if (schoolyears) { %>
           <% schoolyears.forEach(schoolyear => { %>
             <tr>
-              <th scope="row"><%= schoolyear.year %> </th>
-              <td>123</td>
-              <td>123</td>
-              <td>123</td>
+              <td scope="row"><%= schoolyear.year %> </td>
+
+              <td><%= schoolyear.semesters.length %></td>
+              <td><%= schoolyear.subjects.length %></td>
               <td>
                 <% if (schoolyear.isCurrentYear) { %>
                   Current Year

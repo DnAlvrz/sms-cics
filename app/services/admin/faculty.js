@@ -22,7 +22,7 @@ module.exports.new = async (req,res) => {
       const hashedPassword = await bcrypt.hash(req.body.schoolId, salt)
       data.password = hashedPassword;
       const newClass = await User.create(data);
-      res.redirect('/admin/teacher')
+      res.redirect('/admin/teachers')
     } catch (error) {
       console.log(error);
       res.render('500', {error, path:""});

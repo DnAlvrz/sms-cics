@@ -11,21 +11,19 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate({Class, User}) {
       // define association here
-      this.belongsTo(Class, {foreignKey: 'classId'});
-      this.belongsTo(User, {foreignKey: 'studentId'});
+      this.belongsTo(Class, {foreignKey: 'classId', as:'class'});
+      this.belongsTo(User, {foreignKey: 'studentId', as:'studentgrade'});
     }
   };
   Grade.init({
     grade: {
-      type: DataTypes.INTEGER
+      type: DataTypes.STRING
     },
     classId: {
       type: DataTypes.INTEGER,
-      allowNull: false
     },
     studentId: {
       type: DataTypes.INTEGER,
-      allowNull: false
     }
   }, {
     sequelize,

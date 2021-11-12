@@ -1,4 +1,4 @@
-const  {User, Course} = require('../../../models');
+const  {User, Course, Class, Grade} = require('../../../models');
 const bcrypt = require('bcrypt');
 
 module.exports.list = async (req,res) => {
@@ -11,11 +11,12 @@ module.exports.list = async (req,res) => {
     res.render('500', {error:error})
   }
 }
+
 module.exports.new = async (req,res) => {
   if(!req.body) {
     res.redirect('/admin/students');
     return;
-  } 
+  }
 
   const data = {};
   for(const key of Object.keys(req.body)) {
@@ -33,5 +34,26 @@ module.exports.new = async (req,res) => {
   } catch (error) {
     console.log(error);
     res.render('500', {error:error})
+  }
+}
+// Student view
+module.exports.view = async (req, res) => {
+  const studentId = req.params.id;
+  try {
+    const student = await User.findOne({
+      where:{id:studentId},
+      include:[
+        'course',
+        {
+          model: Class,
+          as: 'classlist',
+        },
+        'grades'
+      ]
+    });
+    res.render('admin/student/student', {student, path:"students"})
+  } catch (error) {
+    console.log(error)
+    res.render('500', {error, path:''})
   }
 }

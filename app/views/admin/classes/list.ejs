@@ -8,25 +8,40 @@
     <table class="table">
       <thead>
         <tr>
+          <th scope="col">Section</th>
           <th scope="col">Subject</th>
           <th scope="col">Description</th>
           <th scope="col">Course</th>
+          <th scope="col">Instructor</th>
           <th scope="col">Max. Cap</th>
           <th scope="col">Schedule</th>
           <th scope="col">Time</th>
+          <th scope="col">Action</th>
         </tr>
       </thead>
       <tbody>
-        <% classes.forEach(Class => { %>
-         <tr>
-           <td > <%=Class['subject'].subCode%> </td>
-           <td>  <%=Class['subject'].description%> </td>
-           <td> <%=Class['course'].name%> </td>
-           <td> <%=Class.maxNumberofStudents%> </td>
-           <td> <%=Class.schedule%> </td>
-           <td> <%=Class.startTime%> -  <%=Class.endTime%>  </td>
-         </tr>
-        <% }) %>
+        <% if (classes) { %>
+          <% classes.forEach(Class => { %>
+            <tr>
+              <td> <%=Class.section%> </td>
+              <td> <%=Class['subject'].subCode%> </td>
+              <td>  <%=Class['subject'].description%> </td>
+              <td> <%=Class['course'].name%> </td>
+              <td> 
+                <% if (Class['teacher']) { %>
+                  <%=Class['teacher'].firstname %> <%=Class['teacher'].lastname %>
+                <% } else {%>
+                  TBD
+                  <% } %>
+              </td>
+              <td> <%=Class.maxNumberofStudents%> </td>
+              <td> <%=Class.schedule%> </td>
+              <td> <%=Class.startTime%> -  <%=Class.endTime%>  </td>
+              <td> <a href="classes/<%= Class.id %>" class="btn btn-primary">Edit</a></td>
+            </tr>
+           <% }) %>
+        <% } %>
+        
      
       </tbody>
     </table>
@@ -101,6 +116,16 @@
           <input class="form-control" type="time" id="start" name="endTime" min="09:00" max="18:00" required>
         </div>
        </div>
+       <div class="col-md-5">
+        <label for="schoolyearId" class="col-form-label" required>Year:</label>
+        <select class="form-select" multiple aria-label="multiple select example" name="schoolyearId">
+          <% schoolyears.forEach(schoolyear => { %>
+            <option value="<%=schoolyear.uuid%>" <% if (schoolyear.isCurrentYear) { %>
+              selected
+            <% } %>> <%= schoolyear.year %> </option>
+          <% }) %>
+        </select>
+      </div>
         <input type="submit" class="btn btn-primary mt-3" value="Submit">
       </form>
       </div>

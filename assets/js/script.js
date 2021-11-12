@@ -88,3 +88,7 @@ newStudentForm.addEventListener('submit', async (evt) => {
     console.log(error)
   }
 }) 
+
+function semUpdate() {
+  console.log('active')
+}

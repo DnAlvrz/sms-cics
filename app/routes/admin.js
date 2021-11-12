@@ -34,6 +34,7 @@ router.get('/courses/remove/:uuid/:id', adminCourseRoutes.removesubject);
 // Students
 router.get('/students', adminStudentRoutes.list);
 router.post('/students', adminStudentRoutes.new);
+router.get('/students/:id', adminStudentRoutes.view);
 
 // Subjects
 router.get('/subjects', adminSubjectRoutes.list);
@@ -42,6 +43,11 @@ router.post('/subjects', adminSubjectRoutes.new);
 // Classes
 router.get('/classes', adminClassRoutes.list);
 router.post('/classes', adminClassRoutes.new);
+router.get('/classes/:id', adminClassRoutes.view);
+router.put('/classes/:id', adminClassRoutes.update);
+router.put('/classes/:id/grades/:studentId', adminClassRoutes.addGrade);
+router.post('/classes/:id/add-teacher', adminClassRoutes.addTeacher);
+router.post('/classes/:id/add-student', adminClassRoutes.addStudents);
 
 
 // teachers
