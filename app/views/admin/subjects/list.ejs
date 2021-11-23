@@ -13,20 +13,28 @@
           <th scope="col">Semester</th>
           <th scope="col">Year Level</th>
           <th scope="col">Prerequisite</th>
+          <th scope="col">Action</th>
         </tr>
       </thead>
       <tbody>
-        <% if (subjects.length >0) {%> 
+        <% if (subjects.length >0) {%>
           <% subjects.forEach(subject => { %>
             <tr>
               <td><%= subject.subCode %></td>
               <th><%= subject.description %> </td>
               <td><%= subject.sem %></td>
               <td><%= subject.yearLvl %></td>
-              <td></td>
+              <td>
+                <% if (subject.sub) { %>
+                  <%= subject.sub.prereq.subCode %>
+                <% } else { %>
+                  None
+                <% }  %>
+              </td>
+              <td> <a href="#" class="btn btn-primary">Edit</a></td>
             </tr>
           <% }) %>
-        <% } %> 
+        <% } %>
       </tbody>
     </table>
   </div>
@@ -61,7 +69,7 @@
             <label for="sem">Units</label>
             <input type="number"  class="form-control"  min="0" max="6" name="units" id="subjectUnit">
           </div>
-         
+
         </div>
         <div class="row mb-2">
           <div class="col-md-8">
@@ -79,6 +87,15 @@
               <option value="Fourth Year">4th year</option>
             </select>
           </div>
+          <div class="col-md-4">
+            <label for="sem">Prerequisite</label>
+            <select class="form-select" name="prereq" aria-label="Default select example">
+              <option selected>None</option>
+              <% subjects.forEach(prereq => { %>
+                <option value="<%=prereq.id%>"><%=prereq.subCode%></option>
+              <% }) %>
+            </select>
+          </div>
         </div>
         <input type="submit" class="btn btn-primary" value="Submit">
       </form>
@@ -89,4 +106,3 @@
 </div>
 <!--Modal End-->
 <%- include('includes/admin/_footer') %>
-

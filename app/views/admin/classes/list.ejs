@@ -24,10 +24,15 @@
           <% classes.forEach(Class => { %>
             <tr>
               <td> <%=Class.section%> </td>
-              <td> <%=Class['subject'].subCode%> </td>
-              <td>  <%=Class['subject'].description%> </td>
-              <td> <%=Class['course'].name%> </td>
-              <td> 
+              <% if (Class.subject) { %>
+                <td><%=Class['subject'].subCode%> </td>
+                <td><%=Class['subject'].description%> </td>
+                <% } else {%>
+                <td> None</td>
+                <td> None</td>
+                  <% } %>
+              <td> <%if (Class.course) {%> <%=Class['course'].name%> <%} else {%> None <%}%></td>
+              <td>
                 <% if (Class['teacher']) { %>
                   <%=Class['teacher'].firstname %> <%=Class['teacher'].lastname %>
                 <% } else {%>
@@ -41,8 +46,6 @@
             </tr>
            <% }) %>
         <% } %>
-        
-     
       </tbody>
     </table>
   </div>
@@ -64,7 +67,7 @@
             <label for="section" class="form-label">Section</label>
             <input class="form-control" placeholder="Section" name="section" type="text">
           </div>
-          
+
          </div>
          <div class="col-md-2">
           <div class="mb-3">
@@ -79,7 +82,7 @@
             <% if (courses) { %>
               <% for( let i = 0; i < courses.length; i++ ) { %>
                 <option value="<%= courses[i].uuid %>"><%= courses[i].name %> </option>
-              <% } %>        
+              <% } %>
             <% } %>
           </select>
         </div>
@@ -90,7 +93,7 @@
             <% if (subjects) { %>
               <% for( let i = 0; i < subjects.length; i++ ) { %>
                 <option value="<%= subjects[i].uuid %>"><%= subjects[i].subCode %> </option>
-              <% } %>        
+              <% } %>
             <% } %>
           </select>
         </div>
@@ -133,4 +136,3 @@
   </div>
 </div>
 <%- include('includes/admin/_footer') %>
-

@@ -35,6 +35,7 @@ router.get('/courses/remove/:uuid/:id', adminCourseRoutes.removesubject);
 router.get('/students', adminStudentRoutes.list);
 router.post('/students', adminStudentRoutes.new);
 router.get('/students/:id', adminStudentRoutes.view);
+router.post('/students/:id/add-classes', adminStudentRoutes.addClass);
 
 // Subjects
 router.get('/subjects', adminSubjectRoutes.list);

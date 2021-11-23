@@ -12,7 +12,7 @@ module.exports = {
         type:Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
         allowNull:false
-      }, 
+      },
       description: {
         type: Sequelize.STRING
       },

@@ -9,13 +9,13 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({Course, Semester, Class}) {
+    static associate({Course, Semester, Class, Prereq}) {
       // define association here
       this.belongsToMany(Course, {through:'CourseSubjects'});
       this.hasMany(Class, {foreignKey: 'subjectId', as:"class"})
       //this.belongsTo(Semester, {foreignKey:'semId', as:'semester'})
-      // Prerequisite
-      // this.belongsTo()
+      this.hasOne(Prereq,  {foreignKey: 'subId', as:"sub"});
+      this.hasOne(Prereq,  {foreignKey: 'preReqID', as:"prereq"});
     }
   };
   Subject.init({
@@ -42,8 +42,8 @@ module.exports = (sequelize, DataTypes) => {
     units : {
       type: DataTypes.INTEGER,
       allowNull: false
-    }
-    
+    },
+
   }, {
     sequelize,
     tableName: 'subjects',

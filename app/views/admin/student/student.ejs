@@ -1,4 +1,84 @@
-<%- include('includes/_header')%>
-  <h1><%=student.firstname%></h1>
-  <h1><%=student.lastname%></h1>
-<%- include('includes/_footer')%>
+<%- include('includes/admin/_header') %>
+<div class="row">
+  <% if (message.length>0) { %>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+      <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+      </symbol>
+    </svg>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+      <strong>Success!</strong> <%= message %> !
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+   <% } %>
+  <div class="col-md-3 position-sticky">
+    <div class="card">
+      <div class="card-header text-center">
+        <h6> Course</h6>
+      </div>
+      <div class="card-body">
+        <form action="" method="POST">
+          <label for="name" class="form-label">Name</label>
+          <input type="text" value="" name="name" class="mb-1">
+          <input type="submit" value="Submit" class="btn btn-primary btn-sm">
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-9">
+    <div class="card ">
+      <div class="card-header text-center">
+        <h6> Subjects</h6>
+      </div>
+      <div class="card-body ">
+        <button type="button" class="btn btn-primary btn-sm mb-5" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Add Subject</button>
+        <div class="text-center" id="_header">
+        </div>
+        <h6> First Year</h6>
+        <div class="card mb-4">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Subjects</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body overflow-auto">
+      <!-- Form here -->
+      <form action="/admin/students/<%=student.id%>/add-classes" method="POST">
+        <div class="overflow-auto">
+
+        </div>
+        <ul class="list-group mb-4">
+
+          <% classes.forEach(studentClass => { %>
+            <li class="list-group-item">
+              <div class="form-check">
+                <input class="form-check-input" name="classes" value="<%=studentClass.id%> "type="checkbox" id="<%=studentClass.uuid%>">
+                <label class="form-check-label" for="<%=studentClass.uuid%>">
+                  <%=studentClass.section%> - <%=studentClass.subject.subCode%> (<%=studentClass.subject.description%>)
+                </label>
+              </div>
+            </li>
+          <% }) %>
+        </ul>
+        <input type="submit" value="Submit" class="btn btn-primary">
+
+      </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('includes/admin/_footer') %>

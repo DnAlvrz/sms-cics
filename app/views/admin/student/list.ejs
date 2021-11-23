@@ -14,6 +14,7 @@
           <th scope="col">Course</th>
           <th scope="col">Email</th>
           <th scope="col">Contact No</th>
+          <th scope="col">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -25,15 +26,16 @@
               <td>
                 <%= student.lastname %>
               </td>
-              <td> 
+              <td>
                 <% if(student.course ) {%>
-                  <%= student.course.name %> 
+                  <%= student.course.name %>
                 <% } else {%>
                   None
                 <% }  %>
               </td>
               <td><%= student.email %></td>
               <td><%= student.contactNum %></td>
+              <td><a href="/admin/students/<%=student.id%>" class="btn btn-primary">Edit</a></td>
             </tr>
           <% }) %>
         <% } %>
@@ -106,7 +108,7 @@
               <input type="text" class="form-control" name="contactNum" id="contactNum" placeholder="Contact Number">
             </div>
           </div>
-          
+
         </div>
         <div class="row">
           <div class="col-md-4">
@@ -128,7 +130,7 @@
               <% if (courses) { %>
                 <% for( let i = 0; i < courses.length; i++ ) { %>
                   <option value="<%= courses[i].uuid %>"><%= courses[i].name %> </option>
-                <% } %>        
+                <% } %>
               <% } %>
             </select>
           </div>
@@ -140,4 +142,3 @@
   </div>
 </div>
 <%- include('includes/admin/_footer') %>
-
