@@ -1,0 +1,25 @@
+<%- include('includes/teacher/_header') %>
+    <div class="row">
+        <% teacher.classes.forEach(Class => { %>
+            <div class="col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-header">
+                        <h6 class="text-center">
+                            <%= Class.subject.subCode %>
+                                <%= Class.schoolyear.year %>
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%= Class.subject.description %>
+                        </h5>
+                        <p class="card-text">Students:
+                            <%= Class.students.length %>
+                        </p>
+                        <a href="/teacher/<%=Class.id%>" class="btn btn-primary">View</a>
+                    </div>
+                </div>
+            </div>
+            <% }) %>
+    </div>
+    <%- include('includes/teacher/_footer') %>

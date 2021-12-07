@@ -2,13 +2,15 @@ const  {Course, User, Subject} = require('../../../models')
 
 module.exports.course = async (req,res) => {
   try{
-    const courses = await Course.findAll({include: [{ 
+    const courses = await Course.findAll({include: [{
         model: Subject,
           through: {
             as: 'coursesubjects'
           }},
         'students',
       ]});
+      const a = 123;
+      console.log(a);
     res.render('admin/courses/courses', {courses:courses, path:"courses"})
   } catch(error) {
     console.log(error);
@@ -20,7 +22,7 @@ module.exports.new = async (req,res) => {
   if(!req.body) {
     res.redirect('/admin/courses');
     return;
-  } 
+  }
   const data = {};
   for(const key of Object.keys(req.body)) {
     data[key] = req.body[key]
@@ -68,7 +70,7 @@ module.exports.addsubjects = async (req,res) => {
   const uuid = req.params.uuid;
   const subuuid=[];
   for(const key of Object.keys(req.body)){
-    subuuid.push(req.body[key]);  
+    subuuid.push(req.body[key]);
   }
   try {
     const subjects = await Subject.findAll({ where: {
@@ -82,7 +84,7 @@ module.exports.addsubjects = async (req,res) => {
     console.log(error);
     res.render('500', {error:error, path:"error"})
   }
-  
+
 }
 
 module.exports.removesubject = async (req,res) => {
@@ -97,5 +99,5 @@ module.exports.removesubject = async (req,res) => {
     console.log(error);
     res.render('500', {error:error, path:"courses"})
   }
-  
+
 }

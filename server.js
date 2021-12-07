@@ -1,4 +1,7 @@
 'use strict'
+
+const grade = require('./models/grade');
+
 const express = require('express'),
   app = express(),
   dotenv=require('dotenv'),
@@ -9,7 +12,7 @@ const express = require('express'),
   session = require('express-session'),
   passport = require('passport'),
   initPassport = require('./passport-config'),
-  {sequelize, User} = require('./models'),
+  {sequelize, User, AcademicYear, Grade, Class} = require('./models'),
   authMiddlewares= require('./app/middlewares/auth');
 
 initPassport(passport);
@@ -75,11 +78,36 @@ app.use((req,res, next) => {
 })
 
 // home page
-app.get('/', authMiddlewares.checkAuth , (req, res) => {
-  res.render('index', {user:req.user})
+app.get('/', authMiddlewares.checkAuth , async (req, res) => {
+  if(req.user.roles === "student"){
+    const student = await User.findOne({
+      where: {
+        id:req.user.id
+      },
+      include : [
+        {
+          model: Grade,
+          as: 'grades',
+          include: [{
+            model:Class,
+            as:'subject',
+            include:['subject','schoolyear']
+          }]
+        }
+      ]
+    });
+    const schoolYears = await AcademicYear.findAll({include:['semesters']});
+    res.render('index', {user:req.user, student, schoolYears})
+  }
+  else if(req.user.roles === "teacher"){
+    res.redirect('/teacher')
+  } else {
+    res.redirect('/admin')
+  }
 })
 
 app.use('/admin', require('./app/routes/admin'));
+app.use('/teacher', require('./app/routes/teacher'));
 
 sequelize.authenticate()
   .then(async () => {

@@ -1,0 +1,23 @@
+<header class="index-header">
+  <div class="index-brand">
+      <h1 class="index-title">Zamboanga Peninsula Polytechnic State University</h1>
+      <h1 class="index-title">School Management System</h1>
+  </div>
+  <hr>
+  <nav class="navbar">
+      <ul>
+          <a class="navbar-brand" href="">Home</a>
+          <a class="navbar-brand" href="">About</a>
+          <a class="navbar-brand" href="https://www.zcspc.edu.ph/category/news/">ZPPSU</a>
+          <div class="dropdown">
+              <button class="dropbtn"><%=currentUser.firstname%> <%=currentUser.lastname%></button>
+              <div class="dropdown-content">
+                <% if (currentUser.roles==="admin" || currentUser.roles==="superadmin") { %>
+                  <a href="/admin">Admin</a>
+                <% } %>
+                  <a href="/logout">Logout</a>
+              </div>
+            </div>
+      </ul>
+  </nav>
+</header>
