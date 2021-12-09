@@ -1,75 +1,69 @@
 <!--      Home  page     -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
     <title>Home page</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="index-container">
-        <%- include('includes/student/student-navbar')%>
-
-        <div class="index-body">
-            <div class="body-header">
-                <div class="body-header-title">
-                    <h1>Transcript of Record</h1>
-                    <h1>Grades for the current semesters are not included.</h1>
-                </div>
-                <div class="body-header-btn">
-                    <button>Printable Version</button>
-                </div>
-            </div>
-            <% schoolYears.forEach(sy => { %>
-              <% sy.semesters.forEach(sem => { %>
-              <div class="table-main">
-                <div class="table-brand">
-                    <div class="table-sticky">
-                    <h1>SY <%=sy.year%></h1>
-                    <h1><%=sem.name%></h1>
-                    </div>
-                </div>
-              <table class="content-table">
-                <thead>
-                  <tr>
-                    <th>Subject Code</th>
-                    <th>Units</th>
-                    <th>Subjects</th>
-                    <th>Final Grade</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <% student.grades.forEach(grade => { %>
-                    <% if (grade.subject.semester === sem.name && grade.subject.schoolyear.id == sy.id) { %>
-                      <tr class="active-row">
-                        <td><%=grade.subject.subject.subCode%></td>
-                        <td><%=grade.subject.subject.units%></td>
-                        <td><%=grade.subject.subject.description%></td>
-                        <td><%=grade.grade%></td>
-                      </tr>
-                    <% } %>
-                  <% }) %>
-
-                </tbody>
-              </table>
+      <%- include('includes/student/student-navbar')%>
+      <div class="index-body">
+        <div class="body-header">
+          <div class="body-header-title">
+            <h1>Transcript of Record</h1>
+            <h1>Grades for the current semesters are not included.</h1>
           </div>
-          <% }) %>
-        <% }) %>
-    </div>
-    <footer class="index-footer">
+          <div class="body-header-btn">
+            <button>Printable Version</button>
+          </div>
+        </div>
+        <% schoolYears.forEach(sy => { %> <% sy.semesters.forEach(sem => { %>
+        <div class="table-main">
+          <div class="table-brand">
+            <div class="table-sticky">
+              <h1>SY <%=sy.year%></h1>
+              <h1><%=sem.name%></h1>
+            </div>
+          </div>
+          <table class="content-table">
+            <thead>
+              <tr>
+                <th>Subject Code</th>
+                <th>Units</th>
+                <th>Subjects</th>
+                <th>Final Grade</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% student.grades.forEach(grade => { %> <% if
+              (grade.subject.semester === sem.name &&
+              grade.subject.schoolyear.id == sy.id) { %>
+              <tr class="active-row">
+                <td><%=grade.subject.subject.subCode%></td>
+                <td><%=grade.subject.subject.units%></td>
+                <td><%=grade.subject.subject.description%></td>
+                <td><%=grade.grade%></td>
+              </tr>
+              <% } %> <% }) %>
+            </tbody>
+          </table>
+        </div>
+        <% }) %> <% }) %>
+      </div>
+      <footer class="index-footer">
         <ul class="footer-brand">
-            <h1>School Manangement Group:</h1>
-            <li>Nimfa Villacampa</li>
-            <li>Benedict Mahatma Z. Asmad</li>
-            <li>Archie Arthur M. Amparado</li>
-            <li>Joseph Adonis B. Alvarez</li>
+          <h1>School Manangement Group:</h1>
+          <li>Nimfa Villacampa</li>
+          <li>Benedict Mahatma Z. Asmad</li>
+          <li>Archie Arthur M. Amparado</li>
+          <li>Joseph Adonis B. Alvarez</li>
         </ul>
-    </footer>
-</div>
-
+      </footer>
+    </div>
     <!--    Admin Link    -->
-
-</body>
+  </body>
 </html>

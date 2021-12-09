@@ -7,21 +7,26 @@ const adminSubjectRoutes = require('../services/admin/subject');
 const adminClassRoutes = require('../services/admin/classes');
 const adminFacultyRoutes = require('../services/admin/faculty');
 
-router.use((req,res, next) => {
-  if(req.user.roles === "admin" || req.user.roles === "superadmin" ){
-    next();
-    return;
-  }
-  res.redirect('/')
+router.use((req, res, next) => {
+    if (req.user.roles === "admin" || req.user.roles === "superadmin") {
+        next();
+        return;
+    }
+    res.redirect('/')
 })
 
-router.get('/',adminRoutes.home);
+router.get('/', adminRoutes.home);
 // School Years
-router.get('/schoolyears',adminRoutes.schoolYear);
-router.post('/schoolyears',adminRoutes.newSchoolYear);
+router.get('/schoolyears', adminRoutes.schoolYear);
+router.post('/schoolyears', adminRoutes.newSchoolYear);
+router.put('/schoolyears/:uuid', adminRoutes.updateSchoolYear);
+router.get('/schoolyears/close/:uuid', adminRoutes.closeYear);
+router.get('/schoolyears/open/:uuid', adminRoutes.openYear);
+
 //Semesters
-router.get('/semesters',adminRoutes.semester);
-router.post('/semesters',adminRoutes.newSemester);
+router.get('/semesters', adminRoutes.semester);
+router.post('/semesters', adminRoutes.newSemester);
+router.put('/semesters', adminRoutes.updateSemester);
 
 //Courses
 router.get('/courses', adminCourseRoutes.course);
