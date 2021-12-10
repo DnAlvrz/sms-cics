@@ -10,6 +10,8 @@ router.use((req,res, next) => {
 })
 
 router.get('/', teacherHandlers.home );
+router.get('/:classId', teacherHandlers.classView );
+router.put('/:classId/grades/:studentId', teacherHandlers.addGrade );
 
 
 

@@ -1,0 +1,86 @@
+    <%- include('includes/admin/_header') %>
+    <div class="row">
+    <div class="col-md-12">
+        <div class="card ">
+        <div class="card-header text-center">
+            <h6> Class List</h6>
+        </div>
+        <div class="card-body ">
+            <button class="btn btn-info btn-sm mb-5" onclick="window.print()">Print</button>
+            <div id="printable-area">
+            <div class="">
+                <h6 >Subject: <%= clas.subject.subCode%></h6>
+                <% if (clas.teacher) { %>
+                <h6>Instructor: <%=clas.teacher.firstname%> <%=clas.teacher.lastname%></h6>
+                <% } else {%>
+                <h6>Instructor: TBD</h6>
+                <% } %>
+                <h6> <%= clas.semester %> of <%= clas.schoolyear.year %></h6>
+            </div>
+            <div class="card mb-4">
+                <div class="card-header">
+                Class List
+                </div>
+                
+                <div class="card-body">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Lastname</th>
+                        <th scope="col">Firstname</th>
+                        <th scope="col">Course</th>
+                        <th scope="col">Grade</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% if ( typeof clas.students !== "undefined" ) { %>
+                        <% if (clas.students.length > 0) { %>
+                        <% clas.students.forEach(student => { %>
+                            <tr>
+                            <th><%= student.schoolId %></th>
+                            <td><%= student.lastname %></td>
+                            <td> <%= student.firstname %></td>
+                            <td> 
+                                <% if(student.course ) {%>
+                                <%=student.course.name %> 
+                                <% } else {%>
+                                None
+                                <% }  %>
+                            </td>
+                            <td>
+                                <% if(!clas.grades.length) {%>
+                                <form action="/admin/classes/<%=clas.id%>/grades/<%=student.id%>?_method=PUT" method="post">
+                                    <input style="width: 50px;" type="text" name="grade" id="studentgrade">
+                                    <input type="submit" value="submit" class="btn btn-success">
+                                </form>
+                                <% } else {%>
+                                    <% let match = false;%>
+                                    <% let matchGrade = false;%>
+                                    <%for(let i = 0; i < clas.grades.length; i++){%>
+                                        <% if(clas.grades[i].studentId===student.id ) {%>
+                                        <% match = true;%>
+                                        <% matchGrade = clas.grades[i].grade%>
+                                        <% } %>
+                                    <%}%>
+                                    <form action="/teacher/<%=clas.id%>/grades/<%=student.id%>?_method=PUT" method="post">
+                                        <input style="width: 50px;" type="text" <% if(match ) {%> value="<%=matchGrade%>" <% } %>name="grade" id="studentgrade">
+                                        <input type="submit" value="submit" class="btn btn-success">
+                                    </form>
+                                <% } %>
+                            </td>
+                            </tr>
+                        <% }) %>
+                        <% } %>
+                    <% } %>
+                    </tbody>
+                </table>
+                </div>
+            </div>          
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+    <%- include('includes/admin/_footer') %>
+
