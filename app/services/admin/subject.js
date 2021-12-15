@@ -9,7 +9,6 @@ module.exports.list = async (req,res) => {
           include:['prereq']
         }]
     });
-    console.log(subjects[1].sub)
     res.render('admin/subjects/list', {subjects:subjects, path:'subjects'});
   } catch (error) {
     console.log(error)
